@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Scroll</title>
+        <style>
+            nav {
+                width: 100%;
+                height: 80px;
+                position: fixed;
+                top: 0;
+                background-color: aqua;
+                padding-top: 20px;
+            }
+
+            nav>a {
+                padding: 20px;
+            }
+
+            .bloco {
+                height: 937px;
+            }
+            .active{
+                background-color: blue;
+                color: white;
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav>
+            <a href="#b1" class="b1 active">Bloco 1</a>
+            <a href="#b2" class="b2">Bloco 2</a>
+            <a href="#b3" class="b3">Bloco 3</a>
+        </nav>
+        <main>
+            <section class="bloco" style="background-color: burlywood;" id="b1"></section>
+            <section class="bloco" style="background-color:blueviolet;" id="b2"></section>
+            <section class="bloco" style="background-color:darkred;" id="b3"></section>
+        </main>
+        <script>
+            var vetor = document.querySelectorAll('section');
+            var alturas = {};
+            vetor.forEach(element => {
+                alturas[element.getAttribute('id')] = element.offsetTop;
+            });
+            window.onscroll = () => {
+                let y = window.pageYOffset;
+                for (var seccao in alturas) {
+                    if(y >= alturas[seccao]){                        
+                        document.querySelector('.active').classList.remove('active');
+                        document.querySelector('.'+seccao).classList.add('active');
+                    }
+                }
+            }
+        </script>
+    </body>
+
+</html>
